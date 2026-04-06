@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSL Season Dashboard — School the World</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#182f8c;
+  --green:#259717;
+  --orange:#ff7300;
+  --yellow:#f7ca09;
+  --purple:#8e44ad;
+  --text:#1a1a2e;
+  --text-muted:#6b7280;
+  --bg:#f8f9fc;
+  --surface:#ffffff;
+  --border:#e5e7eb;
+  --border-light:#f0f1f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+h1,h2,h3,.sec-title{font-family:'Montserrat',sans-serif}
+
+/* Header */
+.header{background:var(--navy);padding:20px 32px;display:flex;align-items:center;justify-content:space-between}
+.header-title{color:#fff;font-size:18px;font-weight:600;letter-spacing:.01em}
+.header-sub{color:rgba(255,255,255,.65);font-size:12px;margin-top:2px;font-family:'Open Sans',sans-serif}
+.header-badge{background:rgba(255,255,255,.12);color:#fff;font-size:11px;padding:4px 12px;border-radius:20px;font-family:'Open Sans',sans-serif}
+
+/* Layout */
+.container{max-width:960px;margin:0 auto;padding:28px 24px}
+.section{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:20px}
+.sec-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
+.divider{height:1px;background:var(--border-light);margin:4px 0 20px}
+
+/* Metric cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:4px}
+.card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.card-label{font-size:11px;color:var(--text-muted);margin-bottom:4px;font-family:'Montserrat',sans-serif;font-weight:500}
+.card-val{font-size:24px;font-weight:600;color:var(--text);font-family:'Montserrat',sans-serif}
+.card-sub{font-size:11px;color:var(--text-muted);margin-top:3px}
+.flag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:8px;margin-left:3px;font-weight:600;font-family:'Montserrat',sans-serif}
+.flag-warn{background:#fef3c7;color:#92400e}
+.flag-ok{background:#d1fae5;color:#065f46}
+.flag-alert{background:#fee2e2;color:#991b1b}
+.flag-neutral{background:#e5e7eb;color:#374151}
+
+/* Tabs */
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab{font-size:12px;padding:5px 14px;border:1px solid var(--border);border-radius:20px;cursor:pointer;background:transparent;color:var(--text-muted);font-family:'Open Sans',sans-serif;transition:all .15s}
+.tab:hover{border-color:var(--navy);color:var(--navy)}
+.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* Legend */
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:12px;font-size:12px;color:var(--text-muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.leg-sq{width:10px;height:10px;border-radius:2px;display:inline-block;flex-shrink:0}
+
+/* Chart */
+.chart-wrap{position:relative;width:100%}
+
+/* Note */
+.note{font-size:12px;color:var(--text-muted);margin-top:10px;padding:8px 12px;background:var(--bg);border-radius:6px;border-left:3px solid var(--border)}
+
+/* Fundraising bars */
+.fund-table{width:100%;border-collapse:collapse;margin-bottom:8px}
+.fund-table td{padding:5px 0;vertical-align:middle}
+.fund-label{font-size:12px;color:var(--text-muted);width:130px;white-space:nowrap;font-family:'Open Sans',sans-serif}
+.fund-bar-cell{width:100%;padding:4px 0 4px 10px}
+.fund-pct{font-size:12px;font-weight:600;width:44px;text-align:right;padding-left:10px;white-space:nowrap;font-family:'Montserrat',sans-serif}
+.fund-meta{font-size:11px;color:var(--text-muted);width:150px;text-align:right;padding-left:10px;white-space:nowrap}
+
+footer{text-align:center;padding:24px;font-size:11px;color:var(--text-muted)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">SSL Season Dashboard</div>
+    <div class="header-sub">School the World · Sign-ups, funnel, and fundraising · Updated April 6, 2026</div>
+  </div>
+  <div class="header-badge">Internal planning</div>
+</div>
+
+<div class="container">
+
+<!-- Signup summary cards -->
+<div class="section">
+  <div class="sec-title">2026 season — sign-ups vs. 2025 (2026 through Mar; 2025 full season)</div>
+  <div class="cards">
+    <div class="card"><div class="card-label">Feb trip</div><div class="card-val">31</div><div class="card-sub">vs 45 in 2025 <span class="flag flag-warn">−31%</span></div></div>
+    <div class="card"><div class="card-label">Mar trip</div><div class="card-val">5</div><div class="card-sub">vs 3 in 2025 <span class="flag flag-ok">+67%</span></div></div>
+    <div class="card"><div class="card-label">Apr (other)</div><div class="card-val">24</div><div class="card-sub">vs 54 in 2025 <span class="flag flag-warn">−56%</span></div></div>
+    <div class="card"><div class="card-label">Apr (Cohasset)</div><div class="card-val">18</div><div class="card-sub">no 2025 comp <span class="flag flag-neutral">new</span></div></div>
+    <div class="card"><div class="card-label">Apr (RBTV)</div><div class="card-val">30</div><div class="card-sub">new 2026 group <span class="flag flag-neutral">new</span></div></div>
+    <div class="card"><div class="card-label">Jul trip</div><div class="card-val">23</div><div class="card-sub">vs 98 full 2025 <span class="flag flag-alert">−77%</span></div></div>
+  </div>
+</div>
+
+<!-- Pace chart with tabs -->
+<div class="section">
+  <div class="sec-title">Cumulative sign-up pace — 2025 vs 2026 vs Natalie forecast (Jun–Mar)</div>
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'all')">All trips</button>
+    <button class="tab" onclick="switchTab(this,'feb')">Feb</button>
+    <button class="tab" onclick="switchTab(this,'apr')">Apr</button>
+    <button class="tab" onclick="switchTab(this,'jul')">Jul</button>
+  </div>
+  <div class="legend">
+    <span><span class="leg-sq" style="background:#182f8c"></span>2025 actuals</span>
+    <span><span class="leg-sq" style="background:#259717"></span>2026 actuals</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:16px;border-top:2px dashed #aaa;display:inline-block"></span>Natalie 2026 forecast</span>
+  </div>
+  <div class="chart-wrap" style="height:280px"><canvas id="chartPace"></canvas></div>
+  <div id="paceNote" class="note"></div>
+</div>
+
+<!-- Page visits -->
+<div class="section">
+  <div class="sec-title">SSL page visits — season over season (Jun–Mar)</div>
+  <div class="legend">
+    <span><span class="leg-sq" style="background:#182f8c"></span>2024 season</span>
+    <span><span class="leg-sq" style="background:#259717"></span>2025 season</span>
+    <span><span class="leg-sq" style="background:#ff7300"></span>2026 season</span>
+  </div>
+  <div class="chart-wrap" style="height:240px"><canvas id="chartVisits"></canvas></div>
+  <p class="note">Full-season totals (Jun–Mar): 2024 = 14,220 · 2025 = 10,598 · 2026 = 9,111. Top-of-funnel traffic has been declining year-over-year. Oct 2026 spike (2,076) is the highest single month across all three seasons.</p>
+</div>
+
+<!-- Form submissions -->
+<div class="section">
+  <div class="sec-title">Interest form submissions — season over season (Jun–Mar)</div>
+  <div class="legend">
+    <span><span class="leg-sq" style="background:#182f8c"></span>2024 season</span>
+    <span><span class="leg-sq" style="background:#259717"></span>2025 season</span>
+    <span><span class="leg-sq" style="background:#ff7300"></span>2026 season</span>
+  </div>
+  <div class="chart-wrap" style="height:240px"><canvas id="chartSubs"></canvas></div>
+  <p class="note">Jun–Mar totals: 2024 = 173 · 2025 = 137 · 2026 = 136. Submissions roughly flat with 2025 despite lower traffic — conversion rate may be improving slightly. 2024 was notably stronger across most months.</p>
+</div>
+
+<!-- Funnel -->
+<div class="section">
+  <div class="sec-title">Form impressions vs. submissions — 2026 season (Jun–Mar)</div>
+  <div class="legend">
+    <span><span class="leg-sq" style="background:#182f8c;opacity:.35"></span>Form impressions (left axis)</span>
+    <span><span class="leg-sq" style="background:#ff7300"></span>Submissions (right axis)</span>
+  </div>
+  <div class="chart-wrap" style="height:240px"><canvas id="chartFunnel"></canvas></div>
+  <p class="note">March had the highest submission count (23) of any month despite moderate impressions. Oct drove the most impressions (183) but converted less efficiently.</p>
+</div>
+
+<!-- Fundraising bars -->
+<div class="section">
+  <div class="sec-title">Fundraising progress vs. trip targets — through April 6, 2026</div>
+  <p style="font-size:11px;color:var(--text-muted);margin-bottom:14px">Bar width is proportional to trip target. Color = raised; grey = remaining. Green outline = target exceeded.</p>
+  <table class="fund-table"><tbody id="fundRows"></tbody></table>
+  <p class="note">February fully funded (103%). Cohasset exceeded its target (130%). March corporate includes IvyWise, Flywire, Jackie, and Envisage ($50K raised of $126K target). July fundraising accelerates Apr–Jun — early-season low is expected.</p>
+</div>
+
+<!-- Revenue comparison -->
+<div class="section">
+  <div class="sec-title">Season revenue — cumulative cash flow by month</div>
+  <div class="legend">
+    <span><span class="leg-sq" style="background:#182f8c"></span>2025 actuals (Jan&ndash;Jul 2025)</span>
+    <span><span class="leg-sq" style="background:#259717"></span>2026 actuals (Jul 2025&ndash;Apr 2026)</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:16px;border-top:2px dashed #ff7300;display:inline-block"></span>2027 Natalie forecast (monthly)</span>
+  </div>
+  <div class="chart-wrap" style="height:280px"><canvas id="chartRevenue"></canvas></div>
+  <p class="note">2025 season raised ~$763K (Aug 2024&ndash;Jul 2025, all trips combined). 2026 has collected ~$402K through April 6 &mdash; July fundraising still largely ahead. 2027 forecast projects ~$712K using Natalie&rsquo;s targets &times; historical monthly flow rates. All three lines share the same season axis (Jun = recruiting start).</p>
+</div>
+
+<!-- Sign-up season comparison -->
+<div class="section">
+  <div class="sec-title">Season sign-ups &mdash; cumulative by month: 2025 actuals vs. 2026 actuals vs. 2027 forecast</div>
+  <div class="legend">
+    <span><span class="leg-sq" style="background:#182f8c"></span>2025 actuals (200 total)</span>
+    <span><span class="leg-sq" style="background:#259717"></span>2026 actuals (101 through Mar)</span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:16px;border-top:2px dashed #ff7300;display:inline-block"></span>2027 Natalie forecast (225 total)</span>
+  </div>
+  <div class="chart-wrap" style="height:280px"><canvas id="chartSignups"></canvas></div>
+  <p class="note">2027 forecast (225) projects a 13% increase over 2025 (200). 2026 is currently at 101 through March &mdash; tracking well below both. The Oct&ndash;Nov window will be the key signal for whether 2027 targets are achievable. X-axis = season month (Jun = start of recruiting season).</p>
+</div>
+
+</div>
+
+<footer>School the World · SSL Season Planning · Internal use only</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const months = ['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+
+const d = {
+  '2025': { feb:[0,0,2,2,22,10,8,1,0,0], apr:[0,0,0,4,13,13,7,3,5,9], jul:[0,0,3,1,2,12,11,15,18,17] },
+  '2026': { feb:[1,1,6,0,7,10,5,1,0,0],  apr:[0,3,3,0,11,8,4,1,7,5],  jul:[0,0,0,1,0,1,4,6,4,7] },
+  'nat':  { feb:[1,1,6,0,7,10,5,2,3,2],  apr:[0,3,3,0,11,8,4,3,3,2],  jul:[0,0,0,1,0,1,4,8,15,15] }
+};
+
+function cum(arr){ let s=0; return arr.map(v=>(s+=(v||0),s)); }
+function addArr(a,b){ return a.map((v,i)=>(v||0)+(b[i]||0)); }
+
+const allData = {
+  '2025': addArr(addArr(d['2025'].feb, d['2025'].apr), d['2025'].jul),
+  '2026': addArr(addArr(d['2026'].feb, d['2026'].apr), d['2026'].jul),
+  'nat':  addArr(addArr(d['nat'].feb,  d['nat'].apr),  d['nat'].jul)
+};
+
+const tabConfig = {
+  all: { data25:cum(allData['2025']), data26:cum(allData['2026']), dataN:cum(allData['nat']),
+    note:'All trips combined. 2026 is tracking behind both 2025 actuals and Natalie\'s forecast, with the gap widening from October onward.' },
+  feb: { data25:cum(d['2025'].feb), data26:cum(d['2026'].feb), dataN:cum(d['nat'].feb),
+    note:'February: 2026 (31) tracking behind 2025 (45 full season). Peak recruitment in 2025 was Aug–Oct; 2026 had a strong Oct but softer close.' },
+  apr: { data25:cum(d['2025'].apr), data26:cum(d['2026'].apr), dataN:cum(d['nat'].apr),
+    note:'April: 2026 total (42 across Cohasset/Other/RBTV) vs 2025 (54). Note 2025 did not include Cohasset or RBTV — not directly comparable.' },
+  jul: { data25:cum(d['2025'].jul), data26:cum(d['2026'].jul), dataN:cum(d['nat'].jul),
+    note:'July: 2026 (37) is matched to 2025 at the same point (36 through Mar). The 2025 full total of 98 came from a strong Jan–Mar close — 2026 has replicated that pace.' }
+};
+
+let paceChart;
+function buildPaceChart(key) {
+  const cfg = tabConfig[key];
+  document.getElementById('paceNote').textContent = cfg.note;
+  const datasets = [
+    { label:'2025', data:cfg.data25, borderColor:'#182f8c', backgroundColor:'rgba(24,47,140,.06)', fill:true, tension:.35, pointRadius:4, borderWidth:2 },
+    { label:'2026', data:cfg.data26, borderColor:'#259717', backgroundColor:'rgba(37,151,23,.06)', fill:true, tension:.35, pointRadius:4, borderWidth:2 },
+    { label:'Natalie', data:cfg.dataN, borderColor:'#aaa', borderDash:[5,4], backgroundColor:'rgba(0,0,0,0)', tension:.35, pointRadius:2, borderWidth:1.5 }
+  ];
+  if(paceChart){ paceChart.data.datasets=datasets; paceChart.update(); return; }
+  paceChart = new Chart(document.getElementById('chartPace'),{
+    type:'line', data:{ labels:months, datasets },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } },
+      scales:{ x:{ ticks:{ autoSkip:false, font:{family:"'Open Sans',sans-serif",size:11} } },
+               y:{ beginAtZero:true, ticks:{ font:{family:"'Open Sans',sans-serif",size:11} } } } }
+  });
+}
+buildPaceChart('all');
+
+window.switchTab = function(el, key){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  buildPaceChart(key);
+};
+
+const allMonths=['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+const chartDefaults = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } };
+const tickFont = { font:{family:"'Open Sans',sans-serif",size:11} };
+
+new Chart(document.getElementById('chartVisits'),{
+  type:'line',
+  data:{ labels:allMonths, datasets:[
+    { data:[483,582,645,1412,2138,928,1095,1488,1651,1364], borderColor:'#182f8c', tension:.3, pointRadius:4, borderWidth:2, fill:false },
+    { data:[687,1018,680,1049,1009,1051,793,1167,777,812],  borderColor:'#259717', tension:.3, pointRadius:4, borderWidth:2, fill:false },
+    { data:[637,735,514,572,2076,1101,913,1048,665,805],    borderColor:'#ff7300', tension:.3, pointRadius:4, borderWidth:2, fill:false }
+  ]},
+  options:{ ...chartDefaults, scales:{ x:{ ticks:{ ...tickFont, autoSkip:false } }, y:{ ticks:tickFont, beginAtZero:false } } }
+});
+
+new Chart(document.getElementById('chartSubs'),{
+  type:'line',
+  data:{ labels:allMonths, datasets:[
+    { data:[1,9,7,26,16,11,22,17,23,16], borderColor:'#182f8c', tension:.3, pointRadius:4, borderWidth:2, fill:false },
+    { data:[6,13,14,16,24,10,9,25,13,7], borderColor:'#259717', tension:.3, pointRadius:4, borderWidth:2, fill:false },
+    { data:[4,14,4,18,15,12,13,19,14,23],borderColor:'#ff7300', tension:.3, pointRadius:4, borderWidth:2, fill:false }
+  ]},
+  options:{ ...chartDefaults, scales:{ x:{ ticks:{ ...tickFont, autoSkip:false } }, y:{ ticks:tickFont, beginAtZero:true } } }
+});
+
+new Chart(document.getElementById('chartFunnel'),{
+  type:'bar',
+  data:{ labels:allMonths, datasets:[
+    { data:[35,70,63,237,183,68,68,116,123,166], backgroundColor:'rgba(24,47,140,.18)', borderColor:'rgba(24,47,140,.35)', borderWidth:1, borderRadius:3, yAxisID:'y' },
+    { data:[4,14,4,18,15,12,13,19,14,23], type:'line', borderColor:'#ff7300', backgroundColor:'rgba(255,115,0,.07)', fill:true, tension:.3, pointRadius:4, borderWidth:2, yAxisID:'y2' }
+  ]},
+  options:{ ...chartDefaults, scales:{
+    x:{ ticks:{ ...tickFont, autoSkip:false } },
+    y:{ type:'linear', position:'left', title:{ display:true, text:'Impressions', font:{size:11,family:"'Open Sans',sans-serif"} }, beginAtZero:true, ticks:tickFont },
+    y2:{ type:'linear', position:'right', title:{ display:true, text:'Submissions', font:{size:11,family:"'Open Sans',sans-serif"} }, beginAtZero:true, grid:{ drawOnChartArea:false }, ticks:tickFont }
+  }}
+});
+
+// Fundraising proportional bars
+const trips = [
+  { label:'February',       raised:127058, target:123700, color:'#182f8c' },
+  { label:'Apr (other)',    raised: 83661, target: 92100, color:'#259717' },
+  { label:'Apr (Cohasset)', raised: 76944, target: 59250, color:'#259717' },
+  { label:'Apr (RBTV)',     raised: 30364, target: 44000, color:'#f7ca09' },
+  { label:'March (corp)',   raised: 50345, target:126400, color:'#8e44ad' },
+  { label:'July (HON+GUA)', raised: 28136, target:247400, color:'#ff7300' },
+];
+const maxTarget = Math.max(...trips.map(t=>t.target));
+const tbody = document.getElementById('fundRows');
+trips.forEach(t => {
+  const over = t.raised > t.target;
+  const barW = (t.target / maxTarget * 100).toFixed(1);
+  const fillW = (Math.min(t.raised, t.target) / t.target * 100).toFixed(1);
+  const pctLabel = Math.round(t.raised / t.target * 100) + '%';
+  const raisedFmt = '$' + Math.round(t.raised/1000) + 'K';
+  const targetFmt = '$' + Math.round(t.target/1000) + 'K';
+  const pctColor = over ? '#059669' : '#1a1a2e';
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="fund-label">${t.label}</td>
+    <td class="fund-bar-cell">
+      <div style="width:${barW}%;position:relative;height:18px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;height:100%;width:${fillW}%;background:${t.color};opacity:.88;border-radius:4px"></div>
+        ${over?`<div style="position:absolute;top:0;left:0;height:100%;width:100%;border:2px solid ${t.color};border-radius:4px;opacity:.7"></div>`:''}
+      </div>
+    </td>
+    <td class="fund-pct" style="color:${pctColor}">${pctLabel}</td>
+    <td class="fund-meta">${raisedFmt} of ${targetFmt}</td>`;
+  tbody.appendChild(tr);
+});
+
+// Revenue comparison — shared 14-month season axis: Jun, Jul, Aug, Sep, Oct, Nov, Dec, Jan, Feb, Mar, Apr, May, Jun, Jul
+const seaLabels = ['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul'];
+function cumArr(arr){ let s=0; return arr.map(v=>(s+=v,s)); }
+
+// 2025 season: full season Aug 2024 – Jul 2025 (from Trip Donation Flow Analysis)
+// Jun/Jul 2024 = no activity; Aug onward has data
+const rev25raw = [0, 0, 1571, 5944, 33493, 76102, 131551, 50922, 83666, 59362, 82982, 84304, 72620, 80842];
+const cum25rev = cumArr(rev25raw);
+
+// 2026 season: Jul 2025–Apr 2026 actuals (from GiveButter transactions); May–Jul = null
+const rev26raw = [null, 750, 6201, 13025, 13414, 33076, 78734, 89625, 42787, 105626, 19145, null, null, null];
+const cum26rev = (function(){ let s=0; return rev26raw.map(v=>v===null?null:(s+=v,s)); })();
+
+// 2027 monthly forecast: Jun–Jul axis, activity starts Aug (pos 2)
+const rev27monthly = [0, 0, 5614, 14423, 44369, 65075, 112291, 97403, 95877, 70298, 61934, 70847, 74202, 0];
+const cum27rev = cumArr(rev27monthly);
+
+new Chart(document.getElementById('chartRevenue'),{
+  type:'line',
+  data:{ labels:seaLabels, datasets:[
+    { label:'2025 actuals', data:cum25rev, borderColor:'#182f8c', backgroundColor:'rgba(24,47,140,.05)', fill:false, tension:.35, pointRadius:4, borderWidth:2 },
+    { label:'2026 actuals', data:cum26rev, borderColor:'#259717', backgroundColor:'rgba(37,151,23,.05)', fill:false, tension:.35, pointRadius:4, borderWidth:2, spanGaps:false },
+    { label:'2027 forecast', data:cum27rev, borderColor:'#ff7300', borderDash:[6,4], backgroundColor:'rgba(0,0,0,0)', tension:.35, pointRadius:3, borderWidth:2 }
+  ]},
+  options:{ ...chartDefaults,
+    plugins:{ ...chartDefaults.plugins, tooltip:{ callbacks:{ label: ctx => ctx.parsed.y===null?'':ctx.dataset.label+': $'+Math.round(ctx.parsed.y/1000)+'K' } } },
+    scales:{
+      x:{ ticks:{ ...tickFont, autoSkip:false } },
+      y:{ beginAtZero:true, ticks:{ ...tickFont, callback: v => '$'+Math.round(v/1000)+'K' } }
+    }
+  }
+});
+
+// Sign-up season comparison — all on shared Jun–Jun axis (14 months)
+const suLabels = ['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul'];
+
+// 2025: 14 months Jun24–Jul25
+const su25 = [0,0,5,7,38,37,26,19,23,26,3,12,3,1];
+const cumSu25 = cumArr(su25);
+
+// 2026: 10 months Jun25–Mar26, then nulls
+const su26 = [1,4,9,1,18,21,15,9,11,12,null,null,null,null];
+const cumSu26 = (function(){ let s=0; return su26.map(v=>v===null?null:(s+=v,s)); })();
+
+// 2027 Natalie forecast: 13 months Jun26–Jun27 (no Jul data), pad 1 null at end
+const su27 = [1,2,10,17,39,69,18,11,20,18,5,12,3,null];
+const cumSu27 = cumArr(su27.map(v=>v===null?0:v));
+// keep trailing null for display
+const cumSu27display = su27.map((v,i)=>v===null?null:cumSu27[i]);
+
+new Chart(document.getElementById('chartSignups'),{
+  type:'line',
+  data:{ labels:suLabels, datasets:[
+    { label:'2025 actuals', data:cumSu25, borderColor:'#182f8c', backgroundColor:'rgba(24,47,140,.05)', fill:false, tension:.35, pointRadius:4, borderWidth:2 },
+    { label:'2026 actuals', data:cumSu26, borderColor:'#259717', backgroundColor:'rgba(37,151,23,.05)', fill:false, tension:.35, pointRadius:4, borderWidth:2, spanGaps:false },
+    { label:'2027 forecast', data:cumSu27display, borderColor:'#ff7300', borderDash:[6,4], backgroundColor:'rgba(0,0,0,0)', tension:.35, pointRadius:3, borderWidth:2, spanGaps:false }
+  ]},
+  options:{ ...chartDefaults,
+    scales:{
+      x:{ ticks:{ ...tickFont, autoSkip:false } },
+      y:{ beginAtZero:true, ticks:tickFont }
+    }
+  }
+});
+</script>
+</body>
+</html>
