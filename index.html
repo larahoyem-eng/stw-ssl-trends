@@ -158,7 +158,7 @@ footer{text-align:center;padding:24px;font-size:11px;color:var(--text-muted)}
   <div class="sec-title">Fundraising progress vs. trip targets — through April 6, 2026</div>
   <p style="font-size:11px;color:var(--text-muted);margin-bottom:14px">Bar width is proportional to trip target. Color = raised; grey = remaining. Green outline = target exceeded.</p>
   <table class="fund-table"><tbody id="fundRows"></tbody></table>
-  <p class="note">February fully funded (103%). Cohasset exceeded its target (130%). March corporate includes IvyWise, Flywire, Jackie, and Envisage ($50K raised of $126K target). July fundraising accelerates Apr–Jun — early-season low is expected.</p>
+  <p class="note">February exceeded its $115K goal (110%). March corporate ($29K goal) and April RBTV ($31K goal) are both well over target. Cohasset ($75K goal) and April Other ($85K goal) are tracking strong. July ($400K goal) is expected to be low at this stage — fundraising accelerates Apr–Jun.</p>
 </div>
 
 <!-- Revenue comparison -->
@@ -283,12 +283,12 @@ new Chart(document.getElementById('chartFunnel'),{
 
 // Fundraising proportional bars
 const trips = [
-  { label:'February',       raised:127058, target:123700, color:'#182f8c' },
-  { label:'Apr (other)',    raised: 83661, target: 92100, color:'#259717' },
-  { label:'Apr (Cohasset)', raised: 76944, target: 59250, color:'#259717' },
-  { label:'Apr (RBTV)',     raised: 30364, target: 44000, color:'#f7ca09' },
-  { label:'March (corp)',   raised: 50345, target:126400, color:'#8e44ad' },
-  { label:'July (HON+GUA)', raised: 28136, target:247400, color:'#ff7300' },
+  { label:'February',       raised:127058, target:115000, color:'#182f8c' },
+  { label:'March (corp)',   raised: 50345, target: 29000, color:'#8e44ad' },
+  { label:'Apr (RBTV)',     raised: 30364, target: 31000, color:'#f7ca09' },
+  { label:'Apr (Cohasset)', raised: 76944, target: 75000, color:'#259717' },
+  { label:'Apr (other)',    raised: 83661, target: 85000, color:'#259717' },
+  { label:'July (HON+GUA)', raised: 28136, target:400000, color:'#ff7300' },
 ];
 const maxTarget = Math.max(...trips.map(t=>t.target));
 const tbody = document.getElementById('fundRows');
